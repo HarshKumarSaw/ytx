@@ -1,16 +1,18 @@
 import sys
-import os
-import subprocess
 from pathlib import Path
+import subprocess
+
 
 def print_banner():
-    print("="*25)
+    print("=" * 25)
     print("   YTX Downloader 🚀")
     print("   Powered by Zeno")
-    print("="*25)
+    print("=" * 25)
+
 
 def get_url():
     return input("Enter YouTube video URL:\n> ").strip()
+
 
 def get_quality_choice():
     print("Select quality:")
@@ -22,6 +24,7 @@ def get_quality_choice():
         print("Invalid choice. Please enter 1, 2, or 3.")
         choice = input("> ").strip()
     return choice
+
 
 def construct_yt_dlp_cmd(url, quality, download_path):
     format_map = {
@@ -40,9 +43,11 @@ def construct_yt_dlp_cmd(url, quality, download_path):
         cmd += ['--extract-audio', '--audio-format', 'mp3']
     return cmd
 
+
 def check_ffmpeg():
     from shutil import which
     return which("ffmpeg") is not None
+
 
 def get_downloads_folder():
     home = Path.home()
@@ -53,20 +58,21 @@ def get_downloads_folder():
     else:
         return home
 
+
 def main():
     print_banner()
     url = get_url()
     quality = get_quality_choice()
     downloads = get_downloads_folder()
-    
+
     if not check_ffmpeg():
         print("\n⚠️  ffmpeg not found! Install it for best performance:")
         print("Linux: sudo apt install ffmpeg")
         print("Windows/macOS: Download from https://ffmpeg.org/download.html\n")
-    
+
     cmd = construct_yt_dlp_cmd(url, quality, downloads)
     print(f"\nDownloading to {downloads} ...\n")
-    
+
     try:
         subprocess.run(cmd, check=True)
         print("\n✅ Download complete!")
@@ -74,6 +80,7 @@ def main():
         print("\n❌ Error during download:")
         print(e)
         print("Please check the URL and try again.")
+
 
 if __name__ == "__main__":
     main()
