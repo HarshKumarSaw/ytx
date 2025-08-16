@@ -74,7 +74,9 @@ def main():
         print("Windows/macOS: Download from https://ffmpeg.org/download.html\n")
 
     cmd = construct_yt_dlp_cmd(url, quality, downloads)
-    print(f"\nDownloading to {downloads} ...\n")
+    print(
+    f"\nDownloading to {downloads} ...\n"
+    )
 
     try:
         subprocess.run(cmd, check=True)
