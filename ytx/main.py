@@ -28,32 +28,35 @@ def get_quality_choice():
 
 def construct_yt_dlp_cmd(url, quality, download_path):
     format_map = {
-        "1": 'bv*[height<=1080]+ba/bestvideo[height<=1080]+bestaudio',
-        "2": 'bv*[height<=720]+ba/bestvideo[height<=720]+bestaudio',
-        "3": 'bestaudio',
+        "1": "bv*[height<=1080]+ba/bestvideo[height<=1080]+bestaudio",
+        "2": "bv*[height<=720]+ba/bestvideo[height<=720]+bestaudio",
+        "3": "bestaudio",
     }
-    outtmpl = str(download_path / '%(title)s.%(ext)s')
+    outtmpl = str(download_path / "%(title)s.%(ext)s")
     cmd = [
         "yt-dlp",
-        "-o", outtmpl,
-        "-f", format_map.get(quality, 'bestaudio'),
-        url
+        "-o",
+        outtmpl,
+        "-f",
+        format_map.get(quality, "bestaudio"),
+        url,
     ]
     if quality == "3":
-        cmd += ['--extract-audio', '--audio-format', 'mp3']
+        cmd += ["--extract-audio", "--audio-format", "mp3"]
     return cmd
 
 
 def check_ffmpeg():
     from shutil import which
+
     return which("ffmpeg") is not None
 
 
 def get_downloads_folder():
     home = Path.home()
-    if sys.platform == 'win32':
+    if sys.platform == "win32":
         return home / "Downloads"
-    elif sys.platform in ['linux', 'darwin']:
+    elif sys.platform in ["linux", "darwin"]:
         return home / "Downloads"
     else:
         return home
@@ -84,4 +87,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
