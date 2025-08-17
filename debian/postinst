@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# Post-install script: ensure dependencies
+pkg install -y python ffmpeg yt-dlp

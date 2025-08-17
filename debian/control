@@ -1,0 +1,9 @@
+Package: ytx
+Version: 0.1
+Section: utils
+Priority: optional
+Architecture: all
+Depends: python, ffmpeg, yt-dlp
+Maintainer: Harsh Kumar Saw <harshsaw01@gmail.com>
+Description: YTX - YouTube downloader for Termux
+ A simple CLI wrapper around yt-dlp and ffmpeg for easy video downloading.

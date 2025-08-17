@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# Wrapper to launch the Python package
+python -m ytx "$@"
